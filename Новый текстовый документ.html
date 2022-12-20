@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript">
+		function Algamal()
+		{
+			var massiv = [];
+			var numberP = +prompt("Введите число Случайное число");
+			var numberX = +prompt("Введите число Случайное число №2");
+			var numberM = +prompt("Введите число Сообщение");
+			var numberK = +prompt("Введите число Сессионный ключ");
+			document.write("Введенные числа :" + "<br>" + "Случайное число: " + numberP + "<br>" + "Случайное число №2: " + numberX + "<br>" + "Сообщение: " + numberM + "<br>" + "Сессионный ключ: " + numberK)
+			for(var i = 0; i < numberP; i++)
+	    	{
+	    		if(IsCoprime(numberP, i))
+	    		{
+	    			massiv.push(i);
+	    		}
+
+	    	}
+	    	var dlina = massiv.length;
+	    	for(var g = 2; g < numberP; g++)
+	    	{
+	    		var result = g ** dlina;
+	    		if(result > numberP)
+	    		{
+	    			if(result % numberP == 1)
+	    			{
+		    			document.write("<br>" + "Первообразный корень " + numberP + " = " + g);
+		    			break;
+	    			}
+	    		}
+	    		else
+	    		{
+	    			if(result == 1)
+	    			document.write("<br>" + "Первообразный корень " + numberP + " = " + g);
+	    			break;
+	    		}
+	    		return g;		    			
+	    	}
+	    	if(1 < numberX < numberP)
+	    	{
+	    		var y = (g ** numberX) % numberP;	
+	    	}
+	    	else
+	    	{
+	    		document.write("<br>" + "Число Х введено некорректно");
+	    	}
+	    	document.write("<br>" + "Open keys: " + numberP + ", " + numberX + ", " + y);
+	    	document.write("<br>" + "close keys: " + numberX);
+	    	var a = (g ** numberK) % numberP;
+	    	var b = ((y ** numberK) * numberM) % numberP;
+	    	document.write("<br>" + "<br>" + "Шифр:"+ "<br>" + "1 Число = " + a + "<br>" + "2 Число = " + b);
+	    	var M = (b * (a ** (numberP - 1 - numberX))) % numberP;
+	    	document.write("<br>" + "<br>" + "Расшифровка:" + "<br>" + "Число М = " + M);
+	    	function IsCoprime(b, i)
+    		{
+				while(i)
+				{
+					var a = b % i;
+					b = i;
+					i = a;
+				}
+				if (Math.abs(b) == 1) 
+				{	
+					return true; 
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<button id="button1" onclick="Algamal();">Шифр Эль-гамаля</button>
+</body>
+</html>
